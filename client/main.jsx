@@ -1,9 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
+import { initApp } from '../imports/app/init-app';
 
-import App from '../imports/ui/App.jsx';
+import Toplevel from '../imports/app/app.component';
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById('render-target'));
+  initApp();
+
+  render(<Toplevel />, document.getElementById('render-target'));
 });

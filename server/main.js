@@ -6,10 +6,12 @@ Meteor.startup(() => {
   let sessions = new Meteor.Collection('sessions');
 
   Meteor.publish("sessions", function() {
-    this.session.socket.on("close", function() {
+    console.log(this)
+    this._session.socket.on("close", function() {
       console.log('done session');
       console.log(this);
     });
+    return sessions.find();
   });
 
   Meteor.onConnection( (data)=> {
