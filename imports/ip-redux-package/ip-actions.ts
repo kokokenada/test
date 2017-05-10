@@ -8,6 +8,7 @@ export class IPActions {
   }
   private static prefix = 'IP_';
   static NEW_IP = IPActions.prefix + 'NEW_IP';
+  static DELETE_IP = IPActions.prefix + 'DELETED_IP';
   static INITIAIZE = IPActions.prefix + 'INITIALIZE';
 
   static newIP(ipSession:IIPSession) {
@@ -18,6 +19,16 @@ export class IPActions {
     };
     ReduxPackageCombiner.dispatch(action);
   }
+
+  static deleteIP(ipSession:IIPSession) {
+    let payload:IIPActionPayload = { ipSession };
+    let action:IPayloadAction = {
+      type: IPActions.DELETE_IP,
+      payload
+    };
+    ReduxPackageCombiner.dispatch(action);
+  }
+
 
   static initialize() {
     let action:IPayloadAction = {

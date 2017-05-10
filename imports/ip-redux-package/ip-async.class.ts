@@ -61,6 +61,9 @@ function watchIPS() {
               IPActions.newIP(ipChange.newDocument); // Dispatc new IP
               break;
             }
+            case EDocumentChangeType.REMOVED: {
+              IPActions.deleteIP(ipChange.oldDocument);
+            }
             default:
           }
         }

@@ -1,10 +1,13 @@
 
 export interface IIPState {
  ips:IIPSession[];
+ lastConnected: IIPSession;
 }
 
 export interface IIPSession {
-  address: string;
+  id: string;
+  clientAddress: string;
+  start: Date
 }
 
 export interface IIPActionPayload {
@@ -12,7 +15,8 @@ export interface IIPActionPayload {
 }
 
 export const INITIAL_STATE_IP:IIPState = {
-  ips:[]
+  ips:[],
+  lastConnected: null
 };
 
 
