@@ -5,6 +5,13 @@ Meteor.startup(() => {
 
   let sessions = new Meteor.Collection('sessions');
 
+  Meteor.publish("sessions", function() {
+    this.session.socket.on("close", function() {
+      console.log('done session');
+      console.log(this);
+    });
+  });
+
   Meteor.onConnection( (data)=> {
 
     console.log('data');
