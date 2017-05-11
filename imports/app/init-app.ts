@@ -7,7 +7,7 @@ export function initApp() {
       new IPPackage(),
     ],
     null,
-    {consoleLogging: true}
+    {consoleLogging: false}
   );
   IPActions.initialize();
 
