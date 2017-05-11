@@ -3,9 +3,6 @@ import {IIPActionPayload, IIPSession} from './ip-types';
 
 export class IPActions {
 
-  constructor() {
-
-  }
   private static prefix = 'IP_';
   static NEW_IP = IPActions.prefix + 'NEW_IP';
   static DELETE_IP = IPActions.prefix + 'DELETED_IP';
@@ -28,7 +25,6 @@ export class IPActions {
     };
     ReduxPackageCombiner.dispatch(action);
   }
-
 
   static initialize() {
     let action:IPayloadAction = {

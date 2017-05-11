@@ -28,7 +28,6 @@ class _ViewerList extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
     ipSessions: state.ipSessions

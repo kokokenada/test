@@ -10,8 +10,10 @@ export function ipconnectReducer(
 
   let payload:IIPActionPayload = action.payload;
   switch (action.type) {
+
     case IPActions.NEW_IP:
       return {...state, ips: state.ips.concat(payload.ipSession), lastConnected: payload.ipSession}; // Concat is immuatable
+
     case IPActions.DELETE_IP:
       const newArray: IIPSession[] = [];
       state.ips.forEach( ( ip:IIPSession ) => {
@@ -20,6 +22,7 @@ export function ipconnectReducer(
         }
       } );
       return {...state, ips: newArray};
+
     default:
       return state;
   }

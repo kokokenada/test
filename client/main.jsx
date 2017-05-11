@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import { initApp } from '../imports/app/init-app';
 
-import Toplevel from '../imports/app/app.component';
+import Toplevel from '../imports/app/top-level';
 
 Meteor.startup(() => {
   initApp();

@@ -17,8 +17,14 @@ import {MeteorCursorObservers} from '../lib/meteor-cursor-observer';
 
 export class IPAsync {
 
+  /**
+   *
+   * @param ipState
+   *
+   * Redux middleware to handle communication with server
+   *
+   */
   ipPlayMiddleware = (ipState: IIPState) => (next: any) => (action: IPayloadAction) => {
-    let payload: IIPActionPayload = action.payload;
     switch (action.type) {
       case IPActions.INITIAIZE:
         watchIPS();
@@ -28,7 +34,13 @@ export class IPAsync {
   };
 }
 
-
+/**
+ *
+ * @returns {Meteor.SubscriptionHandle}
+ *
+ * Tells meteor server we want to be notified of changes to sessions collection
+ *
+ */
 function runSubscription() {
   return Meteor.subscribe('sessions',  {
     onStop: (error: any) => {
@@ -37,37 +49,33 @@ function runSubscription() {
         console.error(error);
       }
     },
-    onReady: ()=> {
-
-    }
+    onReady: ()=> {}
   });
 }
 
+/**
+ * Subcribe to changes to sessions (a Mongo collection) and fire redux actions on changes
+ */
 function watchIPS() {
-  Tracker.autorun(()=> {
-    let subscriptionHandle = runSubscription();
-    let ipCollection = new Mongo.Collection("sessions");
+  let subscriptionHandle = runSubscription(); // Startup could be more robust by find() only when ready
+  let ipCollection = new Mongo.Collection("sessions");
+  let ipCursor: Mongo.Cursor<any> = ipCollection.find();
 
-    let isReady = true; //subscriptionHandle.ready();
-    if (isReady) {
-
-      let ipCursor: Mongo.Cursor<any> = ipCollection.find();
-
-      let ipSessions$:Observable<IDocumentChange<IIPSession>> = MeteorCursorObservers.fromMeteorCursor<IIPSession>(ipCursor);
-      ipSessions$.subscribe(
-        (ipChange:IDocumentChange<IIPSession>) => {
-          switch (ipChange.changeType) {
-            case EDocumentChangeType.NEW: {
-              IPActions.newIP(ipChange.newDocument); // Dispatc new IP
-              break;
-            }
-            case EDocumentChangeType.REMOVED: {
-              IPActions.deleteIP(ipChange.oldDocument);
-            }
-            default:
-          }
+  // Convert changes to sessions collection to an RxJS stream
+  let ipSessions$:Observable<IDocumentChange<IIPSession>>
+    = MeteorCursorObservers.fromMeteorCursor<IIPSession>(ipCursor);
+  ipSessions$.subscribe(
+    (ipChange:IDocumentChange<IIPSession>) => {
+      switch (ipChange.changeType) {
+        case EDocumentChangeType.NEW: {
+          IPActions.newIP(ipChange.newDocument); // Dispatch new IP
+          break;
         }
-      )
+        case EDocumentChangeType.REMOVED: {
+          IPActions.deleteIP(ipChange.oldDocument); // Dispatch end of session
+        }
+        default:
+      }
     }
-  })
+  );
 }

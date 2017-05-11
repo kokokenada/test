@@ -7,7 +7,7 @@ Shows a list of IP addresses viewing the page
 Create a single-page web app that:
 
 1. **Shows the list of IP addresses currently viewing the app**
-2. **Show IP of the last connected user (separatelly)**
+2. **Show IP of the last connected user (separately)**
 3. **When a new user opens the app, dynamically adds their IP address to the list of IPs**
 
 ## Guidelines
@@ -35,4 +35,25 @@ You will be evaluated with the following in mind:
 
 Happy coding!
 
+# Test Results Installation Instructions
+
+1. Install meteor (https://www.meteor.com/install). Usually:
+````
+curl https://install.meteor.com/ | sh
+````
+2. Clone repo 
+````
+git clone https://github.com/kokokenada/test.git
+````
+3. Build
+````
+cd test
+typings install
+npm install
+meteor
+````
+
+You might need typings (meteor npm install -g typings) and fix $PATH. It might build without typings.
+  
+Server runs on port 3000 by default. (Open localhost:3000 in your browser)
 

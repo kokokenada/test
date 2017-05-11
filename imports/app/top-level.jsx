@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
-import { ReduxPackageCombiner} from 'redux-package';
+import { ReduxPackageCombiner } from 'redux-package';
 import ViewerList from '../ui/viwer-list';
 
 export default class Toplevel extends Component {
