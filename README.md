@@ -48,12 +48,9 @@ git clone https://github.com/kokokenada/test.git
 3. Build
 ````
 cd test
-typings install
 npm install
 meteor
 ````
-
-You might need typings (meteor npm install -g typings) and fix $PATH. It might build without typings.
   
 Server runs on port 3000 by default. (Open localhost:3000 in your browser)
 
