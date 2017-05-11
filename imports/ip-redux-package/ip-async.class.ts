@@ -17,7 +17,7 @@ import {MeteorCursorObservers} from '../lib/meteor-cursor-observer';
 
 export class IPAsync {
 
-  ipPlayMiddleware = (ipState: IIPState) => next => (action: IPayloadAction) => {
+  ipPlayMiddleware = (ipState: IIPState) => (next: any) => (action: IPayloadAction) => {
     let payload: IIPActionPayload = action.payload;
     switch (action.type) {
       case IPActions.INITIAIZE:
@@ -31,7 +31,7 @@ export class IPAsync {
 
 function runSubscription() {
   return Meteor.subscribe('sessions',  {
-    onStop: (error) => {
+    onStop: (error: any) => {
       if (error) {
         console.error("Error returned from Meteor.subscribe");
         console.error(error);
