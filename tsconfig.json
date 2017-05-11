@@ -6,10 +6,9 @@
     "module": "commonjs",
     "target": "es5",
     "jsx": "react",
-    "isolatedModules": false
+    "isolatedModules": false,
+    "lib":["es6"]
   },
-  "files": [
-    "./typings/main.d.ts",
-    "./src/index.tsx"
-  ]
+  "typeRoots": ["./typings"]
+
 }
